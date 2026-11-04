@@ -186,7 +186,7 @@ footer { padding: 32px 6vw; text-align: center; color: var(--suave); font-size: 
   html { scroll-behavior: auto; }
   .cursor { animation: none; }
   /* com reduzir movimento: as letras só aparecem aos poucos, sem se mover nem desfocar */
-  .nome .letra { transform: none; filter: none; animation-name: aparecerLetra; animation-duration: 0.6s; }
+  .nome .letra { transform: none; filter: none; animation-name: aparecerLetra; }
   @keyframes aparecerLetra { to { opacity: 1; } }
   * { transition: none !important; }
 }
@@ -208,14 +208,14 @@ footer { padding: 32px 6vw; text-align: center; color: var(--suave); font-size: 
 }
 
 @media (max-width: 760px) { .projetos { grid-template-columns: 1fr; } }
-@media (prefers-reduced-motion: reduce) { .nome .letra { animation: none; opacity: 1; } }
+
 
 .topo { width: auto; margin: 0 var(--margem-pagina); display: flex; justify-content: space-between; align-items: center; min-height: 68px; border-bottom: 1px solid var(--linha); }
 .assinatura { display: inline-flex; align-items: center; gap: 10px; font: 600 1.1rem "Space Grotesk", "Segoe UI", sans-serif; }
 .assinatura img { width: 32px; height: 32px; object-fit: contain; }
-.amostra { order: -1; display: flex; gap: 5%; align-items: center; justify-content: center; aspect-ratio: 16 / 9; border-radius: 8px; background: radial-gradient(ellipse at left, #39263c, #171220 75%); }
+.amostra { container-type: inline-size; width: 100%; padding: 10px; order: -1; display: flex; gap: 5%; align-items: center; justify-content: center; aspect-ratio: 16 / 9; border-radius: 8px; background: radial-gradient(ellipse at left, #39263c, #171220 75%); }
 .amostra img { width: 24%; }
-.amostra span { font: 700 clamp(1.3rem, 3vw, 3rem)/1 "Space Grotesk", "Segoe UI", sans-serif; letter-spacing: -.05em; }
+.amostra span { font: 700 clamp(.85rem, 8cqw, 2rem)/1.12 "Space Grotesk", "Segoe UI", sans-serif; letter-spacing: -.05em; }
 .projetoImagem { order: -1; }
 .secao h2 { letter-spacing: -.045em; font-weight: 600; }
 @media (min-width: 761px) {

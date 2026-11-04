@@ -139,7 +139,8 @@ function digitar() {
   }
   setTimeout(digitar, espera);
 }
-if (!reduzir) { campo.textContent = ""; setTimeout(digitar, 2600); }
+campo.textContent = "";
+setTimeout(digitar, 2600);
 
 /* Menu */
 const botao = document.getElementById("menuBtn");
