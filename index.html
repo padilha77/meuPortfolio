@@ -8,12 +8,14 @@
     <meta name="description" content="Portfólio de João Paulo Ribas Padilha, estudante de Engenharia de Software e desenvolvedor Java.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=Orbitron:wght@500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <canvas id="estrelas" aria-hidden="true"></canvas>
 
+    <div class="topo">
+    <a class="assinatura" href="#inicio"><img src="imagens/meuFavicon.png" alt="">João Paulo Ribas Padilha</a>
     <button class="menuBtn" id="menuBtn" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu">
         <span></span><span></span><span></span>
     </button>
@@ -24,10 +26,12 @@
         <a href="#projetos">Projetos</a>
         <a href="#contato">Contato</a>
     </nav>
+    </div>
 
     <header class="hero" id="inicio">
-        <h1 class="nome" aria-label="João Paulo Ribas Padilha"><span class="linha">João Paulo</span><span class="linha">Ribas <span class="rosa">Padilha</span></span></h1>
+        <div class="apresentacao"><h1 class="nome" aria-label="João Paulo Ribas Padilha"><span class="linha">João Paulo</span><span class="linha">Ribas <span class="rosa">Padilha</span></span></h1>
         <p class="cargo"><span id="cargo">Desenvolvedor Java</span><i class="cursor" aria-hidden="true"></i></p>
+        <p class="resumo">Estudo Engenharia de Software e desenvolvo aplicações web com Java e Spring Boot.</p>
         <ul class="redes">
             <li><a href="https://github.com/padilha77" target="_blank" rel="noopener" aria-label="GitHub">
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
@@ -39,6 +43,11 @@
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
             </a></li>
         </ul>
+        </div>
+        <a class="mapa" href="#financeflow">
+            <svg viewBox="0 0 400 145" aria-hidden="true"><ellipse cx="200" cy="73" rx="150" ry="42" transform="rotate(-12 200 73)" fill="none" stroke="#866694"/><circle cx="200" cy="73" r="29" fill="#271b32" stroke="#ee76c8"/><g fill="#f2e5f6" font-family="sans-serif" font-size="15" text-anchor="middle"><text x="200" y="78">Java</text><text x="62" y="128">API REST</text><text x="330" y="27">PostgreSQL</text></g><g fill="#ee76c8"><rect x="54" y="94" width="6" height="6"/><rect x="338" y="45" width="6" height="6"/></g></svg>
+            <small>Projeto em destaque</small><strong>FinanceFlow</strong><span>Explorar projeto ↓</span>
+        </a>
     </header>
 
     <main>
@@ -60,7 +69,7 @@
                     <li>Git e GitHub</li>
                 </ul>
             </div>
-            <img class="fotoPerfil" src="imagens/fotoPerfil.jpeg" alt="Foto de João Paulo Padilha">
+            <div class="retrato"><img class="fotoPerfil" src="imagens/fotoPerfil.jpeg" alt="Foto de João Paulo Padilha"></div>
         </section>
 
         <section id="projetos" class="secao">
@@ -68,14 +77,14 @@
             <div class="projetos">
                 <!-- Para cada projeto, troque o título, a descrição, as tags e o link do GitHub -->
 
-<article class="card">
+<article class="card" id="financeflow">
     <h3>FinanceFlow</h3>
 
     <img
-        src="https://raw.githubusercontent.com/padilha77/financeFlow/main/docs/images/dashboard.png"
+        src="imagens/financeflow-dashboard.png"
         alt="Dashboard do FinanceFlow"
         class="projetoImagem"
-        loading="lazy"
+        width="1440" height="1394"
     >
 
     <p>
@@ -100,14 +109,11 @@
 </article>
 
                 <article class="card">
+                    <div class="amostra" aria-hidden="true"><img src="imagens/meuFavicon.png" alt=""><span>João Paulo<br>Ribas Padilha</span></div>
                     <h3>Este portfólio</h3>
                     <p>Site pessoal desenvolvido em HTML, CSS e JavaScript, com fundo animado de estrelas.</p>
                     <ul class="tags"><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>
                     <a href="https://github.com/padilha77" target="_blank" rel="noopener">Ver no GitHub</a>
-                </article>
-                <article class="card cardVazio">
-                    <h3>Em breve</h3>
-                    <p>Novos projetos serão adicionados.</p>
                 </article>
             </div>
         </section>

@@ -31,13 +31,15 @@ const ctx = canvas.getContext("2d");
 let largura = 0, altura = 0, foco = 0, estrelas = [];
 let alvoX = 0, alvoY = 0, desvioX = 0, desvioY = 0;
 let impulso = 0, ultimoScroll = window.scrollY, ultimoTempo = 0;
-const VELOCIDADE = 0.00008; // quanto menor, mais lento o voo
+const VELOCIDADE = 0.00020; // quanto menor, mais lento o voo
 
 function novaEstrela(inicial) {
+  const z = inicial ? Math.random() * 0.85 + 0.15 : 1;
+  const dispersao = inicial ? 1 : 0.8;
   return {
-    x: (Math.random() * 2 - 1) * 1.6,
-    y: (Math.random() * 2 - 1) * 1.6,
-    z: inicial ? Math.random() * 0.98 + 0.02 : 1,
+    x: (Math.random() - 0.5) * largura * dispersao * z / foco,
+    y: (Math.random() - 0.5) * altura * dispersao * z / foco,
+    z,
     cor: "255,255,255"
   };
 }
@@ -112,6 +114,7 @@ window.addEventListener("resize", () => {
   if (window.innerWidth === larguraAnterior) return;
   larguraAnterior = window.innerWidth;
   criarEstrelas();
+
 });
 
 /* Cargo digitado */
@@ -150,3 +153,25 @@ function alternarMenu(abrir) {
 botao.addEventListener("click", () => alternarMenu(!menu.classList.contains("aberto")));
 menu.querySelectorAll("a").forEach(a => a.addEventListener("click", () => alternarMenu(false)));
 document.addEventListener("keydown", e => { if (e.key === "Escape") alternarMenu(false); });
+
+/* A navegação acompanha a seção que ocupa o início da tela. */
+const destinos = [...menu.querySelectorAll("a")].map(link => ({
+  link,
+  secao: document.querySelector(link.hash)
+}));
+function atualizarDestino() {
+  let atual = destinos[0];
+  for (const destino of destinos) {
+    if (destino.secao.getBoundingClientRect().top <= window.innerHeight * 0.35) atual = destino;
+  }
+  if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2) {
+    atual = destinos[destinos.length - 1];
+  }
+  for (const destino of destinos) {
+    if (destino === atual) destino.link.setAttribute("aria-current", "location");
+    else destino.link.removeAttribute("aria-current");
+  }
+}
+window.addEventListener("scroll", atualizarDestino, { passive: true });
+window.addEventListener("resize", atualizarDestino);
+atualizarDestino();
