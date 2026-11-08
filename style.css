@@ -132,18 +132,18 @@ h1, h2, h3 { font-family: "Space Grotesk", "Arial Black", sans-serif; font-weigh
   display: grid;
   grid-template: minmax(0, 1fr) / minmax(0, 1fr);
   place-items: center;
-  filter: drop-shadow(0 0 2px #888);
-  background: url("imagens/aro-pixel.svg") center / contain no-repeat;
+
+
 }
 .fotoPerfil {
-  width: 97%;
-  height: 97%;
+  width: 100%;
+  height: 100%;
   aspect-ratio: 1;
   border-radius: 50%;
   object-fit: cover;
   object-position: center 12%;
   filter: grayscale(1);
-  transition: filter 850ms ease-in-out;
+  transition: filter 850ms ease-in-out, transform 350ms cubic-bezier(.22, 1, .36, 1), box-shadow 350ms ease;
 }
 .skills { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
 .skills li { padding: 6px 16px; border: 1px solid var(--linha); border-radius: 999px; font-size: 0.92rem; }
@@ -334,7 +334,16 @@ footer { margin-top: 36px; }
 }
 .frase em { color: var(--texto); }
 
-.retrato:hover .fotoPerfil { filter: grayscale(0); }
+@media (hover: hover) and (pointer: fine) {
+  .retrato:hover .fotoPerfil {
+    filter: grayscale(0);
+    transform: translateY(-8px) scale(1.04);
+    box-shadow: 0 22px 35px #0003;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .retrato:hover .fotoPerfil { transform: none; }
+}
 .acoes a, .contatos a, .menuBtn { transition: background-color 150ms ease; }
 .botaoPrincipal:is(:hover, :focus-visible) { background: var(--suave); }
 :is(.botaoSecundario, .contatos a, .menuBtn):is(:hover, :focus-visible) { background: var(--realce); }
@@ -360,7 +369,7 @@ footer { margin-top: 36px; }
 }
 :root[data-tema="claro"] #estrelas { filter: none; opacity: .48; }
 .mapa svg, .topo::before, .topo::after { filter: grayscale(1); }
-.retrato { background-blend-mode: luminosity; background-color: transparent; }
+
 :is(.card, .mapa, .contatos a, .menu a, .acoes a)::after { filter: grayscale(1); }
 .temaBtn { margin-left: 12px; padding: 8px 12px; min-height: 44px; border: 1px solid var(--linha); border-radius: 6px; background: var(--controle); color: var(--texto); cursor: pointer; white-space: nowrap; }
 .temaBtn:is(:hover, :focus-visible) { background: var(--realce); }
