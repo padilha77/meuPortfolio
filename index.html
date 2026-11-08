@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>João Paulo Padilha | Desenvolvedor Java</title>
+    <title>João Paulo Ribas Padilha | Desenvolvedor Java</title>
     <link rel="icon" href="imagens/meuFavicon.png" type="image/x-icon">
     <meta name="description" content="Portfólio de João Paulo Ribas Padilha, estudante de Engenharia de Software e desenvolvedor Java.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=Orbitron:wght@500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=3a91442">
+    <link rel="stylesheet" href="style.css?v=20261108-minimalista">
 </head>
 <body>
     <canvas id="estrelas" aria-hidden="true"></canvas>
@@ -26,12 +26,18 @@
         <a href="#projetos">Projetos</a>
         <a href="#contato">Contato</a>
     </nav>
+    <button class="temaBtn" id="temaBtn" type="button" aria-label="Ativar tema claro" title="Ativar tema claro" hidden>
+        <svg class="iconeSol" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg>
+        <svg class="iconeLua" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.7 14.5A9 9 0 0 1 9.5 3.3 9 9 0 1 0 20.7 14.5Z"/></svg>
+    </button>
     </div>
 
     <header class="hero" id="inicio">
         <div class="apresentacao"><h1 class="nome" aria-label="João Paulo Ribas Padilha"><span class="linha">João Paulo</span><span class="linha">Ribas <span class="rosa">Padilha</span></span></h1>
         <p class="cargo"><span id="cargo">Desenvolvedor Java</span><i class="cursor" aria-hidden="true"></i></p>
-        <p class="resumo">Estudo Engenharia de Software e desenvolvo aplicações web com Java e Spring Boot.</p>
+        <p class="resumo">Desenvolvo aplicações web com foco em Java, Spring Boot e APIs REST.</p>
+        <p class="frase">Primeiro, resolva o problema. Depois, escreva o <em>código</em>.</p>
+        <div class="acoes"><a class="botaoPrincipal" href="#projetos">Conheça meus projetos</a><a class="botaoSecundario" href="#contato">Vamos conversar</a></div>
         <ul class="redes">
             <li><a href="https://github.com/padilha77" target="_blank" rel="noopener" aria-label="GitHub">
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
@@ -44,10 +50,7 @@
             </a></li>
         </ul>
         </div>
-        <a class="mapa" href="#financeflow">
-            <svg viewBox="0 0 400 145" aria-hidden="true"><ellipse cx="200" cy="73" rx="150" ry="42" transform="rotate(-12 200 73)" fill="none" stroke="#866694"/><circle cx="200" cy="73" r="29" fill="#271b32" stroke="#ee76c8"/><g fill="#f2e5f6" font-family="sans-serif" font-size="15" text-anchor="middle"><text x="200" y="78">Java</text><text x="62" y="128">API REST</text><text x="330" y="27">PostgreSQL</text></g><g fill="#ee76c8"><rect x="54" y="94" width="6" height="6"/><rect x="338" y="45" width="6" height="6"/></g></svg>
-            <small>Projeto em destaque</small><strong>FinanceFlow</strong><span>Explorar projeto ↓</span>
-        </a>
+        <div class="retrato"><img class="fotoPerfil" src="imagens/fotoPerfil.jpeg" alt="Foto de João Paulo Padilha"></div>
     </header>
 
     <main>
@@ -55,9 +58,7 @@
             <div class="sobreTexto">
                 <h2>Sobre mim</h2>
                 <p>
-                    Sou estudante de Engenharia de Software, apaixonado por tecnologia e desenvolvimento de software.
-                    Tenho experiência em desenvolvimento web e estou sempre buscando aprender novas tecnologias e
-                    aprimorar minhas habilidades.
+                    Curso Engenharia de Software e aplico o que aprendo em projetos web. No FinanceFlow, desenvolvi uma API REST, integrei o PostgreSQL e escrevi testes automatizados.
                 </p>
                 <p>Estou em busca da minha primeira oportunidade como desenvolvedor júnior ou na área de TI.</p>
                 <ul class="skills" aria-label="Tecnologias">
@@ -69,11 +70,19 @@
                     <li>Git e GitHub</li>
                 </ul>
             </div>
-            <div class="retrato"><img class="fotoPerfil" src="imagens/fotoPerfil.jpeg" alt="Foto de João Paulo Padilha"></div>
+            <div class="mapa">
+
+            <small>Explore minhas tecnologias</small><strong>Do código à interface</strong><div class="atalhosTecnologia"><button data-tecnologia="Java">Java</button><button data-tecnologia="JavaScript">JavaScript</button><button data-tecnologia="PostgreSQL">PostgreSQL</button></div></div>
         </section>
 
         <section id="projetos" class="secao">
-            <h2>Projetos</h2>
+            <h2>Projetos</h2><p class="introSecao">Projetos web e desktop, com detalhes sobre as tecnologias e acesso ao código-fonte.</p>
+            <div class="filtros" id="filtros" role="group" aria-label="Filtrar projetos" hidden></div>
+            <p class="resultadoFiltro" id="resultadoFiltro" role="status"></p>
+            <div class="controleVitrine" hidden>
+                <div id="seletorProjetos" role="group" aria-label="Escolher projeto"></div>
+                <div class="setasVitrine"><button id="projetoAnterior" aria-label="Projeto anterior">←</button><span id="posicaoProjeto" aria-live="polite"></span><button id="projetoSeguinte" aria-label="Próximo projeto">→</button></div>
+            </div>
             <div class="projetos">
                 <!-- Para cada projeto, troque o título, a descrição, as tags e o link do GitHub -->
 
@@ -128,13 +137,20 @@
                     <h3>Este portfólio</h3>
                     <p>Site pessoal desenvolvido em HTML, CSS e JavaScript, com fundo animado de estrelas.</p>
                     <ul class="tags"><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>
-                    <a href="https://github.com/padilha77" target="_blank" rel="noopener">Ver no GitHub</a>
+                    <a href="https://github.com/padilha77/meuPortfolio" target="_blank" rel="noopener">Ver código no GitHub</a>
+                </article>
+                <article class="card">
+                    <h3>Calculadora JavaFX</h3>
+                    <img class="projetoImagem calculadoraImagem" src="imagens/calculadora.png" alt="Calculadora JavaFX com visor escuro e operadores laranja">
+                    <p>Calculadora desktop inspirada no iOS, com suporte a teclado, porcentagens e operações encadeadas.</p>
+                    <ul class="tags"><li>Java</li><li>JavaFX</li><li>BigDecimal</li></ul>
+                    <a href="https://github.com/padilha77/calculadoraIOS" target="_blank" rel="noopener">Ver código no GitHub</a>
                 </article>
             </div>
         </section>
 
         <section id="contato" class="secao">
-            <h2>Onde me encontrar</h2>
+            <div><h2>Vamos conversar?</h2><p class="introSecao">Busco minha primeira oportunidade em desenvolvimento ou TI.</p></div>
             <ul class="contatos">
                 <li><a href="https://www.linkedin.com/in/joaopauloribaspadilha/" target="_blank" rel="noopener">LinkedIn</a></li>
                 <li><a href="https://github.com/padilha77" target="_blank" rel="noopener">GitHub</a></li>
@@ -143,8 +159,16 @@
         </section>
     </main>
 
+    <dialog class="detalhesProjeto" id="detalhesProjeto" aria-labelledby="tituloDetalhes">
+        <form method="dialog"><button class="fecharDetalhes" aria-label="Fechar detalhes">Fechar ×</button></form>
+        <h2 id="tituloDetalhes"></h2>
+        <div id="imagemDetalhes"></div>
+        <p id="textoDetalhes"></p>
+        <ul class="tags" id="tagsDetalhes"></ul>
+        <a id="linkDetalhes" target="_blank" rel="noopener">Ver código no GitHub</a>
+    </dialog>
     <footer>© 2026 João Paulo Ribas Padilha</footer>
 
-    <script src="script.js?v=3a91442"></script>
+    <script src="script.js?v=20261108-minimalista"></script>
 </body>
 </html>

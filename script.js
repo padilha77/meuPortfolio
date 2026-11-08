@@ -23,6 +23,8 @@ const reduzir = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     });
   }
   dividir(titulo);
+  // Finaliza a entrada mesmo se o navegador suspender as animações da aba.
+  setTimeout(() => titulo.classList.add("entradaConcluida"), i * 70 + 1200);
 })();
 
 /* Fundo de espaço: estrelas vindo em direção a você */
@@ -70,6 +72,7 @@ function desenhar(tempo) {
   const cx = largura / 2 + desvioX;
   const cy = altura / 2 + desvioY;
 
+  const temaClaro = document.documentElement.dataset.tema === "claro";
   ctx.clearRect(0, 0, largura, altura);
 
   for (const e of estrelas) {
@@ -84,6 +87,13 @@ function desenhar(tempo) {
     }
 
     const perto = 1 - e.z;
+    if (temaClaro) {
+      ctx.fillStyle = "rgba(0,0,0," + Math.min(1, perto + 0.4) + ")";
+      ctx.beginPath();
+      ctx.arc(sx, sy, 0.9 + perto * 1.4, 0, Math.PI * 2);
+      ctx.fill();
+      continue;
+    }
     ctx.strokeStyle = "rgba(" + e.cor + "," + Math.min(1, perto * 1.5 + 0.15) + ")";
     ctx.lineWidth = perto * 1.8 + 0.4;
     ctx.beginPath();
@@ -118,7 +128,7 @@ window.addEventListener("resize", () => {
 });
 
 /* Cargo digitado */
-const cargos = ["Desenvolvedor Java", "Estudante de Engenharia de Software", "Apaixonado por tecnologia"];
+const cargos = ["Desenvolvedor Java", "Estudante de Engenharia de Software"];
 const campo = document.getElementById("cargo");
 let cargoAtual = 0, letra = 0, apagando = false;
 
@@ -165,7 +175,7 @@ function atualizarDestino() {
   for (const destino of destinos) {
     if (destino.secao.getBoundingClientRect().top <= window.innerHeight * 0.35) atual = destino;
   }
-  if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2) {
+  if (window.scrollY > 0 && window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2) {
     atual = destinos[destinos.length - 1];
   }
   for (const destino of destinos) {
@@ -176,3 +186,142 @@ function atualizarDestino() {
 window.addEventListener("scroll", atualizarDestino, { passive: true });
 window.addEventListener("resize", atualizarDestino);
 atualizarDestino();
+
+const temaBtn = document.getElementById("temaBtn");
+function aplicarTema(claro) {
+  document.documentElement.dataset.tema = claro ? "claro" : "escuro";
+  const acao = claro ? "Ativar tema escuro" : "Ativar tema claro";
+  temaBtn.setAttribute("aria-label", acao);
+  temaBtn.title = acao;
+}
+try {
+  aplicarTema(localStorage.getItem("tema") === "claro");
+} catch {
+  aplicarTema(false);
+}
+temaBtn.hidden = false;
+temaBtn.addEventListener("click", () => {
+  const claro = document.documentElement.dataset.tema !== "claro";
+  aplicarTema(claro);
+  try {
+    localStorage.setItem("tema", claro ? "claro" : "escuro");
+  } catch {
+    // A alternância continua disponível quando o armazenamento está bloqueado.
+  }
+});
+
+/* Exploração dos projetos: filtros e detalhes com foco gerenciado pelo dialog. */
+const cards = [...document.querySelectorAll(".projetos .card")];
+const filtros = document.getElementById("filtros");
+const resultadoFiltro = document.getElementById("resultadoFiltro");
+const detalhes = document.getElementById("detalhesProjeto");
+const tecnologias = ["Todos", ...new Set(cards.flatMap(card =>
+  [...card.querySelectorAll(".tags li")].map(tag => tag.textContent.trim())
+))];
+
+for (const tecnologia of tecnologias) {
+  const filtro = document.createElement("button");
+  filtro.type = "button";
+  filtro.textContent = tecnologia;
+  filtro.setAttribute("aria-pressed", String(tecnologia === "Todos"));
+  filtro.addEventListener("click", () => {
+    for (const card of cards) {
+      const tags = [...card.querySelectorAll(".tags li")].map(tag => tag.textContent.trim());
+      card.hidden = tecnologia !== "Todos" && !tags.includes(tecnologia);
+    }
+    for (const outro of filtros.children) {
+      outro.setAttribute("aria-pressed", String(outro === filtro));
+    }
+    atualizarVitrine(cards.filter(card => !card.hidden));
+    const total = projetosFiltrados.length;
+    resultadoFiltro.textContent = total === 1 ? "1 projeto encontrado" : total + " projetos encontrados";
+  });
+  filtros.appendChild(filtro);
+}
+filtros.hidden = false;
+
+for (const card of cards) {
+  const botaoDetalhes = document.createElement("button");
+  botaoDetalhes.className = "abrirDetalhes";
+  botaoDetalhes.type = "button";
+  botaoDetalhes.textContent = "Explorar projeto";
+  botaoDetalhes.setAttribute("aria-haspopup", "dialog");
+  botaoDetalhes.setAttribute("aria-label", "Explorar " + card.querySelector("h3").textContent);
+  botaoDetalhes.addEventListener("click", () => {
+    document.getElementById("tituloDetalhes").textContent = card.querySelector("h3").textContent;
+    document.getElementById("textoDetalhes").textContent = card.querySelector("p").textContent;
+    const visual = card.querySelector(".projetoImagem, .amostra").cloneNode(true);
+    document.getElementById("imagemDetalhes").replaceChildren(visual);
+    document.getElementById("tagsDetalhes").replaceChildren(
+      ...[...card.querySelectorAll(".tags li")].map(tag => tag.cloneNode(true))
+    );
+    document.getElementById("linkDetalhes").href = card.querySelector("a").href;
+    detalhes.showModal();
+  });
+  card.appendChild(botaoDetalhes);
+}
+
+detalhes.addEventListener("click", evento => {
+  const area = detalhes.getBoundingClientRect();
+  if (evento.target === detalhes &&
+      (evento.clientX < area.left || evento.clientX > area.right ||
+       evento.clientY < area.top || evento.clientY > area.bottom)) {
+    detalhes.close();
+  }
+});
+
+/* Vitrine: a seleção troca imagem, tecnologias e descrição em conjunto. */
+let projetosFiltrados = cards;
+let projetoAtual = 0;
+const seletorProjetos = document.getElementById("seletorProjetos");
+const posicaoProjeto = document.getElementById("posicaoProjeto");
+const botoesProjeto = cards.map((card, indice) => {
+  const botao = document.createElement("button");
+  botao.type = "button";
+  botao.textContent = card.querySelector("h3").textContent;
+  botao.addEventListener("click", () => {
+    projetoAtual = projetosFiltrados.indexOf(card);
+    exibirProjeto();
+  });
+  seletorProjetos.appendChild(botao);
+  return botao;
+});
+function exibirProjeto() {
+  const atual = projetosFiltrados[projetoAtual];
+  cards.forEach((card, indice) => {
+    card.hidden = card !== atual;
+    botoesProjeto[indice].hidden = !projetosFiltrados.includes(card);
+    botoesProjeto[indice].setAttribute("aria-pressed", String(card === atual));
+  });
+  posicaoProjeto.textContent = (projetoAtual + 1) + " / " + projetosFiltrados.length;
+  document.getElementById("projetoAnterior").disabled = projetosFiltrados.length < 2;
+  document.getElementById("projetoSeguinte").disabled = projetosFiltrados.length < 2;
+  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    atual.animate([{ opacity: .3, transform: "translateY(10px)" }, { opacity: 1, transform: "none" }],
+      { duration: 260, easing: "ease-out" });
+  }
+}
+function atualizarVitrine(projetos) {
+  projetosFiltrados = projetos;
+  projetoAtual = 0;
+  exibirProjeto();
+}
+document.getElementById("projetoAnterior").addEventListener("click", () => {
+  projetoAtual = (projetoAtual - 1 + projetosFiltrados.length) % projetosFiltrados.length;
+  exibirProjeto();
+});
+document.getElementById("projetoSeguinte").addEventListener("click", () => {
+  projetoAtual = (projetoAtual + 1) % projetosFiltrados.length;
+  exibirProjeto();
+});
+document.querySelector(".controleVitrine").hidden = false;
+document.querySelector(".projetos").classList.add("vitrine");
+exibirProjeto();
+document.querySelectorAll("[data-tecnologia]").forEach(botao => {
+  botao.addEventListener("click", () => {
+    const filtro = [...filtros.children].find(item => item.textContent === botao.dataset.tecnologia);
+    filtro.click();
+    document.getElementById("projetos").scrollIntoView({ behavior: reduzir ? "instant" : "smooth" });
+    filtro.focus({ preventScroll: true });
+  });
+});
