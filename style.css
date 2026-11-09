@@ -514,3 +514,6 @@ body:has(.detalhesProjeto[open]) { overflow: hidden; }
   .cargo { min-height: 3em; }
   .vitrine .card > :is(.projetoImagem, .amostra) { height: 220px; }
 }
+
+.amostraAssistOS { text-align: center; padding: 24px; }
+.amostraAssistOS small { display: block; margin-top: 16px; font: 400 1rem/1.5 "DM Sans", sans-serif; color: var(--suave); }
