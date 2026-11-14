@@ -33,7 +33,7 @@ const ctx = canvas.getContext("2d");
 let largura = 0, altura = 0, foco = 0, estrelas = [];
 let alvoX = 0, alvoY = 0, desvioX = 0, desvioY = 0;
 let impulso = 0, ultimoScroll = window.scrollY, ultimoTempo = 0;
-const VELOCIDADE = 0.00020; // quanto menor, mais lento o voo
+const VELOCIDADE = 0.00008; // quanto menor, mais lento o voo
 
 function novaEstrela(inicial) {
   const z = inicial ? Math.random() * 0.85 + 0.15 : 1;
@@ -76,7 +76,7 @@ function desenhar(tempo) {
   ctx.clearRect(0, 0, largura, altura);
 
   for (const e of estrelas) {
-    const zAntes = e.z + passo * 5;
+    const zAntes = e.z + passo * 1.5;
     e.z -= passo;
 
     const sx = cx + (e.x / e.z) * foco;
